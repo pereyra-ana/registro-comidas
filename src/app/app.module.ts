@@ -5,10 +5,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ChartComponent } from './chart/chart.component';
+import { MainContentComponent } from './main-content/main-content.component';
 import { MenuComponent } from './menu/menu.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RegistryListComponent } from './registry/list/registry-list.component';
-import { RegistryNewComponent } from './registry/new/registry-new.component';
+import { RegistryListComponent } from './registry/registry-list/registry-list.component';
+import { RegistryNewComponent } from './registry/registry-new/registry-new.component';
 
 
 
@@ -19,7 +20,9 @@ import { RegistryNewComponent } from './registry/new/registry-new.component';
     MenuComponent,
     RegistryListComponent,
     RegistryNewComponent,
-    PageNotFoundComponent
+    MainContentComponent,
+    ChartComponent,
+    MainContentComponent,
   ],
   imports: [
     BrowserModule,
