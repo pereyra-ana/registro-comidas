@@ -1,1 +1,30 @@
-<p>chart works!</p>
+<mat-card>
+    <mat-card-title>Gráficos y Estadísticas</mat-card-title>
+    <mat-card-subtitle>10/10/2019 al 10/11/2019</mat-card-subtitle>
+
+    <div class="date-range-container">
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Cambiar fecha desde">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Cambiar fecha hasta">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <mat-tab-group>
+        <mat-tab label="Alimento / Alimentos Totales">
+            <app-chart-pie class="tab-content"></app-chart-pie>
+        </mat-tab>
+        <mat-tab label="Tipo de Alimento / Alimentos Totales">
+            <app-chart-bar class="tab-content"></app-chart-bar>
+        </mat-tab>
+        <mat-tab label="Agua vs. No-Agua">
+        </mat-tab>
+    </mat-tab-group>
+
+</mat-card>
