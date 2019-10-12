@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChartComponent } from './chart/chart.component';
-import { MainContentComponent } from './main-content/main-content.component';
-import { RegistryListComponent } from './registry/registry-list/registry-list.component';
-import { RegistryNewComponent } from './registry/registry-new/registry-new.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { MainContentComponent } from './components/main-content/main-content.component';
+import { RegistryListComponent } from './components/registry/registry-list/registry-list.component';
+import { RegistryNewComponent } from './components/registry/registry-new/registry-new.component';
 
 
 const routes: Routes = [

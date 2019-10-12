@@ -1,16 +1,16 @@
 <mat-card>
     <mat-card-title>Gráficos y Estadísticas</mat-card-title>
-    <mat-card-subtitle>10/10/2019 al 10/11/2019</mat-card-subtitle>
+    <mat-card-subtitle>{{startDate | date: 'dd/MM/yyyy'}} al {{endDate | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
 
     <div class="date-range-container">
         <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Cambiar fecha desde">
+            <input matInput [matDatepicker]="picker" [matDatepickerFilter]="startDateFilter" placeholder="Cambiar fecha desde" [(ngModel)]="startDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="picker2" placeholder="Cambiar fecha hasta">
+            <input matInput [matDatepicker]="picker2" [matDatepickerFilter]="endDateFilter" placeholder="Cambiar fecha hasta" [(ngModel)]="endDate">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
