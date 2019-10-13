@@ -2,7 +2,6 @@ import { ObserversModule } from '@angular/cdk/observers';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatFormField, MatHeaderRowDef, MatRowDef, MatSnackBarModule, MatTable } from '@angular/material';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { MainContentComponent } from 'src/app/main-content/main-content.component';
 import { RegistryListComponent } from '../registry-list/registry-list.component';
 import { RegistryNewComponent } from './registry-new.component';
 
@@ -23,7 +22,6 @@ describe('RegistryNewComponent', () => {
 
         RegistryNewComponent,
         RegistryListComponent,
-        MainContentComponent,
         MatTable,
         MatHeaderRowDef,
         MatRowDef

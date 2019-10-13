@@ -18,14 +18,23 @@ export class RegistryNewComponent {
     private registryService: RegistryService) { }
 
   submitJson(): void {
-    this.registryService.addRegistry(this.registriesJson).subscribe(data => {
-      console.log(data);
+    let parsedJson = null;
+    try {
+      parsedJson = JSON.parse(this.registriesJson);
+      this.registryService.addRegistry(parsedJson).subscribe(data => {
+        console.log(data);
 
-      this.snackBar.open('Registro cargado con éxito', 'Cerrar', {
+        this.snackBar.open('Registro cargado con éxito', 'Cerrar', {
+          duration: 2000,
+        });
+        this.router.navigate([`/registry/list`]);
+      })
+    }
+    catch (error) {
+      this.snackBar.open('Formato inválido', 'Cerrar', {
         duration: 2000,
       });
-      this.router.navigate([`/registry/list`]);
-    })
+    }
   }
 
 }

@@ -1,9 +1,9 @@
 <div class="example-container">
 
     <mat-form-field>
-        <textarea matInput placeholder="Ingrese JSON de entrada" style="height: 400px;" [ngModel]="registriesJson"></textarea>
+        <textarea matInput placeholder="Ingrese JSON de entrada" style="height: 400px;" [(ngModel)]="registriesJson"></textarea>
     </mat-form-field>
 
 </div>
 
-<button mat-raised-button color="primary" (click)="submitJson()">Cargar</button>
+<button mat-raised-button color="primary" (click)="submitJson()" [disabled]="!registriesJson">Cargar</button>

@@ -3,7 +3,7 @@ import { MatNavList, MatSidenav, MatSidenavContainer, MatSidenavContent, MatTool
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
