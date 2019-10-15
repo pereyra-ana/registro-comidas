@@ -11,12 +11,12 @@ mat-grid-tile {
     background: lightblue;
 }
 
-.registry-list {
+/* .registry-list { */
     /* position: absolute;
     left: 5px;
     top: 5px; */
-    width: 25% !important;
-}
+    /* width: 25% !important; */
+/* } */
 
 .round-floating-button {
     top: auto !important;
@@ -24,8 +24,13 @@ mat-grid-tile {
     bottom: 25px !important;
     left: auto !important;
     position: fixed !important;
+    z-index: 100000;
 }
 
 .date-range-container > mat-form-field {
     margin-right: 10px;
+}
+
+mat-list mat-list-item [mat-line] {
+    white-space: normal !important;
 }

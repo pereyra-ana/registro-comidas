@@ -28,15 +28,16 @@
     <div *ngIf="totalRegistries > 0">
         <div *ngFor="let e of dataSource | keyvalue">
             <mat-list class="registry-list">
-                <h3 mat-subheader>{{e.key}}</h3>
+                <h3 mat-subheader>{{getWeekDay(e.key)}} {{e.key}}</h3>
                 <div *ngFor="let c of e.value; let i = index">
                     <mat-list-item>
                         <mat-icon mat-list-icon *ngIf="c.tipo.toLowerCase() == 'comida'">restaurant_menu</mat-icon>
+                        <mat-icon mat-list-icon style="color: darkturquoise" *ngIf="c.tipo.toLowerCase() == 'bebida'">local_drink</mat-icon>
                         <mat-icon mat-list-icon style="color:red" *ngIf="c.tipo.toLowerCase() == 'síntoma'">
                             local_hospital</mat-icon>
                         <mat-icon mat-list-icon style="color: lightseagreen"
-                            *ngIf="c.tipo.toLowerCase() == 'misceláneo'">sports</mat-icon>
-                        <h4 mat-line>{{c.datetime | date : 'hh:mm'}} - {{c.tipo}}</h4>
+                            *ngIf="c.tipo.toLowerCase() == 'misceláneo'">eco</mat-icon>
+                        <h4 mat-line>{{c.datetime | date : 'hh:mm a'}} - {{c.tipo}}</h4>
                         <p mat-line> {{c.valor}} {{c.cantidad ? c.cantidad : (c.intensidad ? c.intensidad : '')}} </p>
                     </mat-list-item>
                     <mat-divider *ngIf="i != e.value.length - 1"></mat-divider>

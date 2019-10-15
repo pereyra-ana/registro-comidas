@@ -18,6 +18,19 @@ export class RegistryListComponent implements OnInit {
   startDate: Date = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
   endDate: Date = new Date();
 
+  weekday = [
+    "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"
+  ]
+
+  getWeekDay(d: string){
+    let day = d.substring(0,2);
+    let month = d.substring(3,5);
+    let year = d.substring(6);
+
+    let date = new Date(month + "/" + day + "/" + year);
+    return this.weekday[date.getDay() - 1]; 
+  }
+
   constructor(
     private registryService: RegistryService,
     private datePipe: DatePipe
