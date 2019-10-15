@@ -7,4 +7,11 @@
     width: 60%;
 /* margin: 20px; */
 }
+
+.back-button {
+    padding: 0;
+    min-width: 0;
+    margin: 0;
+    vertical-align: middle;
+}
   

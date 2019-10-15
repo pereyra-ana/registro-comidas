@@ -6,3 +6,26 @@
 .content-button {
     margin-top: 20px;
 }
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+.registry-list {
+    /* position: absolute;
+    left: 5px;
+    top: 5px; */
+    width: 25% !important;
+}
+
+.round-floating-button {
+    top: auto !important;
+    right: 60px !important;
+    bottom: 25px !important;
+    left: auto !important;
+    position: fixed !important;
+}
+
+.date-range-container > mat-form-field {
+    margin-right: 10px;
+}

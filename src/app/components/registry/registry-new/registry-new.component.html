@@ -1,9 +1,19 @@
-<div class="example-container">
+<mat-card>
+    <mat-card-title>
+        <a mat-button class="back-button">
+            <mat-icon routerLink="/registry/list">keyboard_arrow_left</mat-icon>
+        </a>
+        Nuevo Registro</mat-card-title>
+    <mat-card-subtitle>Carga de nuevo registro de comidas</mat-card-subtitle>
 
-    <mat-form-field>
-        <textarea matInput placeholder="Ingrese JSON de entrada" style="height: 400px;" [(ngModel)]="registriesJson"></textarea>
-    </mat-form-field>
+    <div class="example-container">
 
-</div>
+        <mat-form-field>
+            <textarea matInput placeholder="Ingrese JSON de entrada" style="height: 350px;"
+                [(ngModel)]="registriesJson"></textarea>
+        </mat-form-field>
 
-<button mat-raised-button color="primary" (click)="submitJson()" [disabled]="!registriesJson">Cargar</button>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="submitJson()" [disabled]="!registriesJson">Cargar</button>
+</mat-card>

@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatSidenavModule, MatSnackBarModule, MatTableModule, MatTabsModule, MatToolbarModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatSidenavModule, MatSnackBarModule, MatTableModule, MatTabsModule, MatToolbarModule, MAT_DATE_LOCALE } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,7 +46,8 @@ import { RegistryNewComponent } from './components/registry/registry-new/registr
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatGridListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }

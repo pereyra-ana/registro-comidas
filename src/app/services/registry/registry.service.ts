@@ -13,8 +13,8 @@ export class RegistryService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Registry[]> {
-    return this.http.get<Registry[]>(`${this.url}/registries`);
+  getAll(start: any, end: any): Observable<Registry[]> {
+    return this.http.post<Registry[]>(`${this.url}/registries/filter`, { startDate : start, endDate : end});
   }
 
   addRegistry(registriesJson: any): Observable<any> {
