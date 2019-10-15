@@ -15,13 +15,13 @@
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         
-        <button mat-icon-button aria-label="Buscar"><mat-icon>search</mat-icon></button>
+        <button mat-icon-button aria-label="Buscar" (click)="getDataForCharts()"><mat-icon>search</mat-icon></button>
     
     </div>
 
     <mat-tab-group>
         <mat-tab label="Alimento / Alimentos Totales">
-            <app-chart-pie class="tab-content"></app-chart-pie>
+            <app-chart-pie class="tab-content" [labels]="labelsAlimentoVsTotal" [amounts]="amountsAlimentoVsTotal"></app-chart-pie>
         </mat-tab>
         <mat-tab label="Tipo de Alimento / Alimentos Totales">
             <app-chart-bar class="tab-content"></app-chart-bar>

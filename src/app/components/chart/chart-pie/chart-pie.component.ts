@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -9,72 +9,98 @@ import { Label } from 'ng2-charts';
 })
 export class ChartPieComponent implements OnInit {
 
-    // Pie
-    public pieChartOptions: ChartOptions = {
-      responsive: true,
-      legend: {
-        position: 'right',
-      },
-      plugins: {
-        datalabels: {
-          formatter: (value, ctx) => {
-            const label = ctx.chart.data.labels[ctx.dataIndex];
-            return label;
-          },
-        },
+  @Input()
+  set labels(labels: Label[]) {
+    if (labels) {
+      this.pieChartLabels = labels;
+      if (this.pieChartData) {
+        this.pieChartColors = this.generateXColors(this.pieChartData.length);
+        this.chartReady = true;
       }
-    };
-    public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-    public pieChartData: number[] = [300, 500, 100];
-    public pieChartType: ChartType = 'pie';
-    public pieChartLegend = true;
-    // public pieChartPlugins = [pluginDataLabels];
-    public pieChartColors = [
-      {
-        backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+    }
+  }
+
+  @Input()
+  set amounts(amounts: number[]) {
+    if (amounts) {
+      this.pieChartData = amounts;
+      if (this.pieChartLabels) {
+        this.pieChartColors = this.generateXColors(this.pieChartData.length);
+        this.chartReady = true;
+      }
+    }
+  }
+
+  chartReady: boolean = false;
+
+  // Pie
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'right',
+      display: false
+    },
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          const label = ctx.chart.data.labels[ctx.dataIndex];
+          return label;
+        },
       },
-    ];
-  
-    constructor() { }
-  
-    ngOnInit() {
     }
-  
-    // events
-    public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-      console.log(event, active);
+  };
+  public pieChartLabels: Label[];
+  public pieChartData: number[];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  // public pieChartPlugins = [pluginDataLabels];
+  public pieChartColors: string[];
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  // events
+  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  changeLabels() {
+    const words = ['hen', 'variable', 'embryo', 'instal', 'pleasant', 'physical', 'bomber', 'army', 'add', 'film',
+      'conductor', 'comfortable', 'flourish', 'establish', 'circumstance', 'chimney', 'crack', 'hall', 'energy',
+      'treat', 'window', 'shareholder', 'division', 'disk', 'temptation', 'chord', 'left', 'hospital', 'beef',
+      'patrol', 'satisfied', 'academy', 'acceptance', 'ivory', 'aquarium', 'building', 'store', 'replace', 'language',
+      'redeem', 'honest', 'intention', 'silk', 'opera', 'sleep', 'innocent', 'ignore', 'suite', 'applaud', 'funny'];
+    const randomWord = () => words[Math.trunc(Math.random() * words.length)];
+    this.pieChartLabels = Array.apply(null, { length: 3 }).map(_ => randomWord());
+  }
+
+  getColor(): string {
+    // return "hsl(" + 360 * Math.random() + ',' +
+    //   (25 + 70 * Math.random()) + '%,' +
+    //   (85 + 10 * Math.random()) + '%)'
+
+    return "hsla(" + ~~(360 * Math.random()) + "," +
+      "70%," +
+      "80%,1)"
+  }
+
+
+  // Generate x colors
+  generateXColors(x: number): string[] {
+    let list: string[] = [];
+    let colorList: any = {
+      backgroundColor: list
+    };
+    for (var i = x; i--;) {
+      list.push(this.getColor());
     }
-  
-    public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-      console.log(event, active);
-    }
-  
-    changeLabels() {
-      const words = ['hen', 'variable', 'embryo', 'instal', 'pleasant', 'physical', 'bomber', 'army', 'add', 'film',
-        'conductor', 'comfortable', 'flourish', 'establish', 'circumstance', 'chimney', 'crack', 'hall', 'energy',
-        'treat', 'window', 'shareholder', 'division', 'disk', 'temptation', 'chord', 'left', 'hospital', 'beef',
-        'patrol', 'satisfied', 'academy', 'acceptance', 'ivory', 'aquarium', 'building', 'store', 'replace', 'language',
-        'redeem', 'honest', 'intention', 'silk', 'opera', 'sleep', 'innocent', 'ignore', 'suite', 'applaud', 'funny'];
-      const randomWord = () => words[Math.trunc(Math.random() * words.length)];
-      this.pieChartLabels = Array.apply(null, { length: 3 }).map(_ => randomWord());
-    }
-  
-    // addSlice() {
-    //   this.pieChartLabels.push(['Line 1', 'Line 2', 'Line 3']);
-    //   this.pieChartData.push(400);
-    //   this.pieChartColors[0].backgroundColor.push('rgba(196,79,244,0.3)');
-    // }
-  
-    // removeSlice() {
-    //   this.pieChartLabels.pop();
-    //   this.pieChartData.pop();
-    //   this.pieChartColors[0].backgroundColor.pop();
-    // }
-  
-    // changeLegendPosition() {
-    //   this.pieChartOptions.legend.position = this.pieChartOptions.legend.position === 'left' ? 'top' : 'left';
-    // }
-  
-  
+    return [colorList];
+  }
 
 }

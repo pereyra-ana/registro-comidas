@@ -1,7 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -9,7 +8,6 @@ import { catchError } from 'rxjs/operators';
 export class ResponseHttpInterceptor implements HttpInterceptor {
 
     constructor(
-        private router: Router,
         private snackBar: MatSnackBar,
     ) { }
 
