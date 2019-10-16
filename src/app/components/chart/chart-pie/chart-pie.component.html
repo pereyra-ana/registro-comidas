@@ -1,5 +1,5 @@
-<div class="chart">
-    <canvas *ngIf="chartReady" baseChart 
+<div class="chart" *ngIf="chartReady && pieChartData.length > 0">
+    <canvas baseChart 
     [data]="pieChartData"
     [labels]="pieChartLabels"
     [chartType]="pieChartType"
@@ -8,3 +8,5 @@
     [legend]="pieChartLegend">
     </canvas>
 </div>
+
+<div *ngIf="!chartReady || pieChartData.length == 0">No hay datos</div>
