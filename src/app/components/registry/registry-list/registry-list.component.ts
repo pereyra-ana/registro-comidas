@@ -52,7 +52,7 @@ export class RegistryListComponent implements OnInit {
       }
 
     });
-    console.log(registryDays);
+    // console.log(registryDays);
     return registryDays;
   }
 
@@ -61,7 +61,7 @@ export class RegistryListComponent implements OnInit {
 
   getAll(): void {
     this.registryService.getAll(this.startDate, this.endDate).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.dataSource = this.groupByDay(resp);
       this.totalRegistries = resp.length;
     });

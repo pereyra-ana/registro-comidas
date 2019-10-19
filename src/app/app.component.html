@@ -1,5 +1,8 @@
 <mat-toolbar>
     <mat-toolbar-row>
+        <button mat-icon-button style="margin-left: -15px;" *ngIf="isMobileResolution">
+            <mat-icon (click)="sidenavToggle()">menu</mat-icon>
+        </button>
         <button mat-icon-button routerLink="/">
             <img src="../assets/logoFR.png" height="100%" width="100%" />
         </button>
@@ -7,6 +10,6 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
-<app-menu></app-menu>
+<app-menu [isSivenavOpen]=isSivenavOpen [isMobileResolution]=isMobileResolution></app-menu>
 
 <app-loader></app-loader>

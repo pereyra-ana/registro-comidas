@@ -19,6 +19,8 @@ import { RegistryNewComponent } from './components/registry/registry-new/registr
 import { ResponseHttpInterceptor } from './interceptors/http/response-http.interceptor';
 import { LoaderInterceptor } from './interceptors/loader/loader.interceptor';
 import { LoaderService } from './services/loader/loader.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { LoaderService } from './services/loader/loader.service';
     FormsModule,
     HttpClientModule,
     MatGridListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

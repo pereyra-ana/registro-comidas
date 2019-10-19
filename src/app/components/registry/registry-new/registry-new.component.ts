@@ -22,7 +22,7 @@ export class RegistryNewComponent {
     try {
       parsedJson = JSON.parse(this.registriesJson);
       this.registryService.addRegistry(parsedJson).subscribe(data => {
-        console.log(data);
+        // console.log(data);
 
         this.snackBar.open('Registro cargado con éxito', 'Cerrar', {
           duration: 2000,

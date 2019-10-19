@@ -36,14 +36,14 @@ export class ChartComponent implements OnInit {
   getDataForCharts(): void {
     // datos para alimentos vs total
     this.chartsService.getDataForChart(this.startDate, this.endDate, 'alimentosVsTotal').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.labelsAlimentoVsTotal = data.labels;
       this.amountsAlimentoVsTotal = data.amounts;
     })
 
     // datos para tipos alimentos vs total
     this.chartsService.getDataForChart(this.startDate, this.endDate, 'tiposAlimentosVsTotal').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.labelsTiposAlimentoVsTotal = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
       this.amountsTiposAlimentoVsTotal = data.amounts;
     })
