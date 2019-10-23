@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faAppleAlt, faBan, faBreadSlice, faCarrot, faCheese, faCoffee, faDrumstickBite, faEgg, faGlassMartiniAlt, faIceCream } from '@fortawesome/free-solid-svg-icons';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -31,6 +32,16 @@ export class ChartPieComponent implements OnInit {
     }
   }
 
+  chartHasDetail: boolean;
+
+  @Input()
+  set chartName(chartName: string) {
+    this.pieChartOptions.legend.display = this.getDisplayLabels(chartName);
+  }
+
+  @Input()
+  hashDataValues: any;
+
   chartReady: boolean = false;
 
   // Pie
@@ -47,8 +58,21 @@ export class ChartPieComponent implements OnInit {
           return label;
         },
       },
+    },
+    tooltips: {
+      enabled: true,
+      mode: 'single',
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var allData = data.datasets[tooltipItem.datasetIndex].data;
+          var tooltipLabel = data.labels[tooltipItem.index];
+          var tooltipData = allData[tooltipItem.index];
+          return tooltipLabel + ": " + tooltipData + "%";
+        }
+      }
     }
   };
+
   public pieChartLabels: Label[];
   public pieChartData: number[];
   public pieChartType: ChartType = 'pie';
@@ -56,28 +80,17 @@ export class ChartPieComponent implements OnInit {
   // public pieChartPlugins = [pluginDataLabels];
   public pieChartColors: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    // console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    // console.log(event, active);
-  }
-
-  changeLabels() {
-    const words = ['hen', 'variable', 'embryo', 'instal', 'pleasant', 'physical', 'bomber', 'army', 'add', 'film',
-      'conductor', 'comfortable', 'flourish', 'establish', 'circumstance', 'chimney', 'crack', 'hall', 'energy',
-      'treat', 'window', 'shareholder', 'division', 'disk', 'temptation', 'chord', 'left', 'hospital', 'beef',
-      'patrol', 'satisfied', 'academy', 'acceptance', 'ivory', 'aquarium', 'building', 'store', 'replace', 'language',
-      'redeem', 'honest', 'intention', 'silk', 'opera', 'sleep', 'innocent', 'ignore', 'suite', 'applaud', 'funny'];
-    const randomWord = () => words[Math.trunc(Math.random() * words.length)];
-    this.pieChartLabels = Array.apply(null, { length: 3 }).map(_ => randomWord());
+  getDisplayLabels(chartName: string): boolean {
+    if (chartName === 'tiposAlimentosVsTotal') {
+      this.chartHasDetail = true;
+      return true
+    } return false
   }
 
   getColor(): string {
@@ -89,7 +102,6 @@ export class ChartPieComponent implements OnInit {
       "70%," +
       "80%,1)"
   }
-
 
   // Generate x colors
   generateXColors(x: number): string[] {
@@ -103,4 +115,16 @@ export class ChartPieComponent implements OnInit {
     return [colorList];
   }
 
+  // fontawesome icons
+  faCoffee = faCoffee;
+  faApple = faAppleAlt;
+  faCarrot = faCarrot;
+  faIceCream = faIceCream;
+  faBread = faBreadSlice;
+  faEgg = faEgg;
+  faChicken = faDrumstickBite;
+  faDrink = faGlassMartiniAlt;
+  faCheese = faCheese;
+  faBan = faBan;
+  
 }

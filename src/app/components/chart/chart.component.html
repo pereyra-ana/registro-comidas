@@ -21,10 +21,18 @@
 
     <mat-tab-group>
         <mat-tab label="Alimento / Alimentos Totales">
-            <app-chart-pie class="tab-content" [labels]="labelsAlimentoVsTotal" [amounts]="amountsAlimentoVsTotal"></app-chart-pie>
+            <app-chart-pie class="tab-content" 
+            [labels]="labelsAlimentoVsTotal" 
+            [amounts]="amountsAlimentoVsTotal"
+            [chartName]="'alimentosVsTotal'"
+            [hashDataValues]="hashDataValuesAlimentos"></app-chart-pie>
         </mat-tab>
         <mat-tab label="Tipo de Alimento / Alimentos Totales">
-            <app-chart-bar class="tab-content"></app-chart-bar>
+            <app-chart-pie class="tab-content" 
+            [labels]="labelsTiposAlimentoVsTotal" 
+            [amounts]="amountsTiposAlimentoVsTotal"
+            [chartName]="'tiposAlimentosVsTotal'"
+            [hashDataValues]="hashDataValuesTipos"></app-chart-pie>
         </mat-tab>
         <mat-tab label="Agua vs. No-Agua">
         </mat-tab>

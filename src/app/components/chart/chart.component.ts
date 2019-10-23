@@ -29,9 +29,11 @@ export class ChartComponent implements OnInit {
   // datos para graficos por tipo
   labelsAlimentoVsTotal: Label[];
   amountsAlimentoVsTotal: number[];
+  hashDataValuesAlimentos: any;
 
   labelsTiposAlimentoVsTotal: Label[];
   amountsTiposAlimentoVsTotal: number[];
+  hashDataValuesTipos: any;
 
   getDataForCharts(): void {
     // datos para alimentos vs total
@@ -39,13 +41,15 @@ export class ChartComponent implements OnInit {
       // console.log(data);
       this.labelsAlimentoVsTotal = data.labels;
       this.amountsAlimentoVsTotal = data.amounts;
+      this.hashDataValuesAlimentos = data.values;
     })
 
     // datos para tipos alimentos vs total
     this.chartsService.getDataForChart(this.startDate, this.endDate, 'tiposAlimentosVsTotal').subscribe(data => {
-      // console.log(data);
+      console.log(data);
       this.labelsTiposAlimentoVsTotal = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
       this.amountsTiposAlimentoVsTotal = data.amounts;
+      this.hashDataValuesTipos = data.values;
     })
   }
 }

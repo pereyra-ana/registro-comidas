@@ -1,12 +1,58 @@
 <div class="chart" *ngIf="chartReady && pieChartData.length > 0">
-    <canvas baseChart 
-    [data]="pieChartData"
-    [labels]="pieChartLabels"
-    [chartType]="pieChartType"
-    [options]="pieChartOptions"
-    [colors]="pieChartColors" 
-    [legend]="pieChartLegend">
+    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend">
     </canvas>
 </div>
 
 <div *ngIf="!chartReady || pieChartData.length == 0">No hay datos</div>
+
+<mat-divider style="margin-top: 20px;"></mat-divider>
+
+<div *ngIf="chartHasDetail">
+    <mat-list class="registry-list" style="padding-top: 20px;">
+        <h3 mat-subheader style="margin-top: 0px;">DETALLE DE COMIDAS</h3>
+        <div *ngFor="let e of hashDataValues | keyvalue; let i = index">
+            <mat-list-item>
+                <mat-icon mat-list-icon style="color: burlywood" *ngIf="e.key == 'CEREALES'">
+                    <fa-icon [icon]="faBread"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: peru" *ngIf="e.key == 'PAN'">
+                    <fa-icon [icon]="faBread"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: seagreen" *ngIf="e.key == 'HORTALIZAS'">
+                    <fa-icon [icon]="faCarrot"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: tomato" *ngIf="e.key == 'FRUTAS'">
+                    <fa-icon [icon]="faApple"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: brown" *ngIf="e.key == 'CARNES'">
+                    <fa-icon [icon]="faChicken"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: gray" *ngIf="e.key == 'HUEVO'">
+                    <fa-icon [icon]="faEgg"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: darkkhaki" *ngIf="e.key == 'QUESOS'">
+                    <fa-icon [icon]="faCheese"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: black" *ngIf="e.key == 'LACTEOS'">
+                    <fa-icon [icon]="faCoffee"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: coral" *ngIf="e.key == 'POSTRES'">
+                    <fa-icon [icon]="faIceCream"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: darkturquoise" *ngIf="e.key == 'BEBIDAS'">
+                    <fa-icon [icon]="faDrink"></fa-icon>
+                </mat-icon>
+                <mat-icon mat-list-icon style="color: red" *ngIf="e.key == 'OTROS'">
+                    <fa-icon [icon]="faBan"></fa-icon>
+                </mat-icon>
+
+                <h4 mat-line>{{e.key}}</h4>
+                <p mat-line *ngFor="let v of e.value">
+                    {{v}}
+                </p>
+            </mat-list-item>
+            <mat-divider *ngIf="i != hashDataValues.length - 1"></mat-divider>
+        </div>
+    </mat-list>
+</div>

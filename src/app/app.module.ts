@@ -5,7 +5,10 @@ import { MatButtonModule, MatCardModule, MatDatepickerModule, MatGridListModule,
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartsModule } from 'ng2-charts';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChartBarComponent } from './components/chart/chart-bar/chart-bar.component';
@@ -19,8 +22,6 @@ import { RegistryNewComponent } from './components/registry/registry-new/registr
 import { ResponseHttpInterceptor } from './interceptors/http/response-http.interceptor';
 import { LoaderInterceptor } from './interceptors/loader/loader.interceptor';
 import { LoaderService } from './services/loader/loader.service';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     MatGridListModule,
     MatProgressSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FontAwesomeModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

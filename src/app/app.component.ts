@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -21,4 +22,6 @@ export class AppComponent {
   sidenavToggle(): void {
     this.isSivenavOpen = !this.isSivenavOpen;
   }
+
+  faCoffee = faCoffee;
 }
