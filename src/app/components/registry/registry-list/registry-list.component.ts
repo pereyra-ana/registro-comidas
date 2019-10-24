@@ -42,8 +42,10 @@ export class RegistryListComponent implements OnInit {
 
   groupByDay(registries: Registry[]): RegistryDay {
     let registryDays: RegistryDay = {};
+    let registriesOrdered = [];
+    registriesOrdered = registries.sort((a,b) => a.datetime > b.datetime ? 1 : -1);
 
-    registries.forEach(r => {
+    registriesOrdered.forEach(r => {
       let date = this.datePipe.transform(r.datetime, 'dd/MM/yyyy');
       if (Object.keys(registryDays).indexOf(date) === -1) {
         registryDays[date] = [r];

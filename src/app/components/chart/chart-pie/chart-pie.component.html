@@ -8,7 +8,7 @@
 
 <mat-divider style="margin-top: 20px;"></mat-divider>
 
-<div *ngIf="chartHasDetail">
+<div *ngIf="chartHasDetail && chartReady && pieChartData.length > 0">
     <mat-list class="registry-list" style="padding-top: 20px;">
         <h3 mat-subheader style="margin-top: 0px;">DETALLE DE COMIDAS</h3>
         <div *ngFor="let e of hashDataValues | keyvalue; let i = index">

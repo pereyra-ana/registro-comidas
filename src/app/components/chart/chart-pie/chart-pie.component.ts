@@ -89,7 +89,14 @@ export class ChartPieComponent implements OnInit {
   getDisplayLabels(chartName: string): boolean {
     if (chartName === 'tiposAlimentosVsTotal') {
       this.chartHasDetail = true;
-      return true
+
+      if (window.innerWidth < 768) {
+        this.pieChartOptions.legend.display = false;
+        return false;
+      } else {
+        this.pieChartOptions.legend.display = true;
+        return true;
+      }
     } return false
   }
 
@@ -126,5 +133,5 @@ export class ChartPieComponent implements OnInit {
   faDrink = faGlassMartiniAlt;
   faCheese = faCheese;
   faBan = faBan;
-  
+
 }
