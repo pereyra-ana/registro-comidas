@@ -34,7 +34,11 @@
             [chartName]="'tiposAlimentosVsTotal'"
             [hashDataValues]="hashDataValuesTipos"></app-chart-pie>
         </mat-tab>
-        <mat-tab label="Agua vs. No-Agua">
+        <mat-tab label="Permitidos / No Permitidos">
+            <app-chart-bar class="tab-content" 
+            [labels]="labelsPermitidosVsNo" 
+            [amounts]="amountsPermitidosVsNo"
+            [chartName]="'permitidosVsNo'"></app-chart-bar>
         </mat-tab>
     </mat-tab-group>
 

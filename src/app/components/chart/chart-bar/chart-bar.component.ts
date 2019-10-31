@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -8,6 +8,33 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./chart-bar.component.css']
 })
 export class ChartBarComponent implements OnInit {
+
+  @Input()
+  set labels(labels: Label[]) {
+    if (labels) {
+      this.barChartLabels = labels;
+      // if (this.pieChartData) {
+      //   this.pieChartColors = this.generateXColors(this.pieChartData.length);
+      //   this.chartReady = true;
+      // }
+    }
+  }
+
+  @Input()
+  set amounts(amounts: ChartDataSets[]) {
+    if (amounts) {
+      this.barChartData = amounts;
+      // if (this.pieChartLabels) {
+      //   this.pieChartColors = this.generateXColors(this.pieChartData.length);
+      //   this.chartReady = true;
+      // }
+    }
+  }
+
+  @Input()
+  set chartName(chartName: string) {
+    // this.pieChartOptions.legend.display = this.getDisplayLabels(chartName);
+  }
 
   public barChartOptions: ChartOptions = {
     responsive: true,

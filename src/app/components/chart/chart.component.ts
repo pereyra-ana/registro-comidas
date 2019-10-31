@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Label } from 'ng2-charts';
 import { ChartService } from 'src/app/services/chart/chart.service';
+import { ChartDataSets } from 'chart.js';
 
 @Component({
   selector: 'app-chart',
@@ -35,6 +36,9 @@ export class ChartComponent implements OnInit {
   amountsTiposAlimentoVsTotal: number[];
   hashDataValuesTipos: any;
 
+  labelsPermitidosVsNo: Label[];
+  amountsPermitidosVsNo: ChartDataSets[];
+
   getDataForCharts(): void {
     // datos para alimentos vs total
     this.chartsService.getDataForChart(this.startDate, this.endDate, 'alimentosVsTotal').subscribe(data => {
@@ -46,10 +50,17 @@ export class ChartComponent implements OnInit {
 
     // datos para tipos alimentos vs total
     this.chartsService.getDataForChart(this.startDate, this.endDate, 'tiposAlimentosVsTotal').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.labelsTiposAlimentoVsTotal = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
       this.amountsTiposAlimentoVsTotal = data.amounts;
       this.hashDataValuesTipos = data.values;
+    })
+
+    // datos para permitidos vs no permitidos
+    this.chartsService.getDataForChart(null, null, 'permitidosVsNo').subscribe(data => {
+      console.log(data);
+      this.labelsPermitidosVsNo = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
+      this.amountsPermitidosVsNo = data.amounts;
     })
   }
 }

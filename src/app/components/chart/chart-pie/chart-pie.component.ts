@@ -65,9 +65,17 @@ export class ChartPieComponent implements OnInit {
       callbacks: {
         label: function (tooltipItem, data) {
           var allData = data.datasets[tooltipItem.datasetIndex].data;
+          let sumData = 0
+          allData.forEach(d => {
+            sumData += d;
+          });
+          console.log("all data: " + sumData);
+
           var tooltipLabel = data.labels[tooltipItem.index];
           var tooltipData = allData[tooltipItem.index];
-          return tooltipLabel + ": " + tooltipData + "%";
+          var p = +tooltipData * 100 / sumData;
+          return p.toString().split(".")[0] == "0" ? 
+            tooltipLabel + ": " + p.toString().substring(0,3) + "%" : tooltipLabel + ": " + p.toString().split(".")[0] + "%";
         }
       }
     }
