@@ -26,23 +26,41 @@
 
     <div *ngIf="totalRegistries == 0">No hay registros para mostrar</div>
     <div *ngIf="totalRegistries > 0">
-        <div *ngFor="let e of dataSource | keyvalue">
-            <mat-list class="registry-list">
-                <h3 mat-subheader>{{getWeekDay(e.key)}} {{e.key}}</h3>
-                <div *ngFor="let c of e.value; let i = index">
-                    <mat-list-item>
-                        <mat-icon mat-list-icon *ngIf="c.tipo.toLowerCase() == 'comida'">restaurant_menu</mat-icon>
-                        <mat-icon mat-list-icon style="color: darkturquoise" *ngIf="c.tipo.toLowerCase() == 'bebida'">local_drink</mat-icon>
-                        <mat-icon mat-list-icon style="color:red" *ngIf="c.tipo.toLowerCase() == 'síntoma'">
-                            local_hospital</mat-icon>
-                        <mat-icon mat-list-icon style="color: lightseagreen"
-                            *ngIf="c.tipo.toLowerCase() == 'misceláneo'">eco</mat-icon>
-                        <h4 mat-line>{{c.datetime | date : 'hh:mm a'}} - {{c.tipo}}</h4>
-                        <p mat-line> {{c.valor}} {{c.cantidad ? c.cantidad : (c.intensidad ? c.intensidad : '')}} </p>
-                    </mat-list-item>
-                    <mat-divider *ngIf="i != e.value.length - 1"></mat-divider>
-                </div>
-            </mat-list>
+        <div *ngFor="let e of dataSource">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{getWeekDay(e.datetime)}} {{e.datetime}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <!-- Type your name and age -->
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-list class="registry-list">
+                        <div *ngFor="let c of e.registries; let i = index">
+                            <mat-list-item>
+                                <mat-icon mat-list-icon *ngIf="c.tipo.toLowerCase() == 'comida'">restaurant_menu
+                                </mat-icon>
+                                <mat-icon mat-list-icon style="color: darkturquoise"
+                                    *ngIf="c.tipo.toLowerCase() == 'bebida'">
+                                    local_drink</mat-icon>
+                                <mat-icon mat-list-icon style="color:red" *ngIf="c.tipo.toLowerCase() == 'síntoma'">
+                                    local_hospital</mat-icon>
+                                <mat-icon mat-list-icon style="color: lightseagreen"
+                                    *ngIf="c.tipo.toLowerCase() == 'misceláneo'">eco</mat-icon>
+                                <h4 mat-line>{{c.datetime | date : 'hh:mm a'}} - {{c.tipo}}</h4>
+                                <p mat-line> {{c.valor}}
+                                    {{c.cantidad ? c.cantidad : (c.intensidad ? c.intensidad : '')}} </p>
+                            </mat-list-item>
+                            <!-- <mat-divider *ngIf="i != dataSource.length - 1"></mat-divider> -->
+                            <!-- <mat-divider></mat-divider> -->
+                        </div>
+                    </mat-list>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
         </div>
     </div>
 </mat-card>

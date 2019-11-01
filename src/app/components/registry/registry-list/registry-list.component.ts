@@ -12,7 +12,8 @@ import { RegistryService } from 'src/app/services/registry/registry.service';
 
 export class RegistryListComponent implements OnInit {
   displayedColumns: string[] = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'];
-  dataSource: RegistryDay = {};
+  // dataSource: RegistryDay = {};
+  dataSource: RegistryDay[] = [];
   totalRegistries: number = 0;
 
   startDate: Date = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -22,13 +23,14 @@ export class RegistryListComponent implements OnInit {
     "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"
   ]
 
-  getWeekDay(d: string){
-    let day = d.substring(0,2);
-    let month = d.substring(3,5);
+  getWeekDay(d: string) {
+    let day = d.substring(0, 2);
+    let month = d.substring(3, 5);
     let year = d.substring(6);
 
     let date = new Date(month + "/" + day + "/" + year);
-    return this.weekday[date.getDay() - 1]; 
+    console.log(date.getDay() + " - " + this.weekday[date.getDay() - 1])
+    return date.getDay() != 0 ? this.weekday[date.getDay() - 1] : this.weekday[this.weekday.length - 1]
   }
 
   constructor(
@@ -40,22 +42,38 @@ export class RegistryListComponent implements OnInit {
     this.getAll();
   }
 
-  groupByDay(registries: Registry[]): RegistryDay {
-    let registryDays: RegistryDay = {};
-    let registriesOrdered = [];
-    registriesOrdered = registries.sort((a,b) => a.datetime > b.datetime ? 1 : -1);
+  dateAlreadyInResult(result: RegistryDay[], d: string) {
+    let aux = 0;
+    let found = false;
+    result.forEach(e => {
+      if (e.datetime === d) {
+        found = true;
+        return;
+      }
+      aux += 1;
+    });
+    return found ? aux : -1;
+  }
 
-    registriesOrdered.forEach(r => {
+  groupByDay(registries: Registry[]): RegistryDay[] {
+    let result: RegistryDay[] = [];
+
+    registries.forEach(r => {
       let date = this.datePipe.transform(r.datetime, 'dd/MM/yyyy');
-      if (Object.keys(registryDays).indexOf(date) === -1) {
-        registryDays[date] = [r];
+
+      let index = this.dateAlreadyInResult(result, date);
+      if (index == -1) {
+        let rd = new RegistryDay();
+        rd.datetime = date;
+        rd.registries = [r];
+        result.push(rd);
       } else {
-        registryDays[date].push(r);
+        result[index].registries.push(r)
       }
 
-    });
-    // console.log(registryDays);
-    return registryDays;
+      console.log(result);
+    })
+    return result.sort((a, b) => new Date(a.datetime) > new Date(b.datetime) ? 1 : -1);
   }
 
   startDateFilter = (date: Date) => date <= this.endDate;

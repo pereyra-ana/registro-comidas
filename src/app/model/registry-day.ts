@@ -1,5 +1,7 @@
 import { Registry } from './registry';
 
-export interface RegistryDay {
-    [datetime: string] : Registry[]
+export class RegistryDay {
+    // [datetime: string] : Registry[]
+    datetime: string;
+    registries: Registry[]
 }
