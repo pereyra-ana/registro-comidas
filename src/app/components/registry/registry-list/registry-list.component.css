@@ -18,9 +18,18 @@ mat-grid-tile {
     /* width: 25% !important; */
 /* } */
 
-.round-floating-button {
+.round-floating-button1 {
     top: auto !important;
     right: 25px !important;
+    bottom: 25px !important;
+    left: auto !important;
+    position: fixed !important;
+    z-index: 100000;
+}
+
+.round-floating-button2 {
+    top: auto !important;
+    right: 100px !important;
     bottom: 25px !important;
     left: auto !important;
     position: fixed !important;
@@ -46,3 +55,4 @@ mat-list mat-list-item [mat-line] {
     /* border-top-right-radius: 4px; */
     /* border-top-left-radius: 4px; */
 }
+

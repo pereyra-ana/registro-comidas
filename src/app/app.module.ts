@@ -1,7 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatProgressSpinnerModule, MatSidenavModule, MatSnackBarModule, MatTableModule, MatTabsModule, MatToolbarModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatNativeDateModule, MatProgressSpinnerModule, MatSelectModule, MatSidenavModule, MatSnackBarModule, MatTableModule, MatTabsModule, MatToolbarModule, MAT_DATE_LOCALE } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,7 @@ import { ChartComponent } from './components/chart/chart.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { RegistryFormComponent } from './components/registry/registry-form/registry-form.component';
 import { RegistryListComponent } from './components/registry/registry-list/registry-list.component';
 import { RegistryNewComponent } from './components/registry/registry-new/registry-new.component';
 import { ResponseHttpInterceptor } from './interceptors/http/response-http.interceptor';
@@ -34,6 +35,7 @@ import { LoaderService } from './services/loader/loader.service';
     ChartPieComponent,
     ChartBarComponent,
     LoaderComponent,
+    RegistryFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,9 @@ import { LoaderService } from './services/loader/loader.service';
     MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FontAwesomeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
@@ -68,6 +72,7 @@ import { LoaderService } from './services/loader/loader.service';
 
     LoaderService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [RegistryFormComponent],
 })
 export class AppModule { }

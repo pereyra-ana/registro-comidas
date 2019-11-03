@@ -21,7 +21,7 @@ export class RegistryNewComponent {
     let parsedJson = null;
     try {
       parsedJson = JSON.parse(this.registriesJson);
-      this.registryService.addRegistry(parsedJson).subscribe(data => {
+      this.registryService.addRegistries(parsedJson).subscribe(data => {
         // console.log(data);
 
         this.snackBar.open('Registro cargado con éxito', 'Cerrar', {

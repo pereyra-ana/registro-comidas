@@ -69,7 +69,7 @@ export class ChartPieComponent implements OnInit {
           allData.forEach(d => {
             sumData += d;
           });
-          console.log("all data: " + sumData);
+          // console.log("all data: " + sumData);
 
           var tooltipLabel = data.labels[tooltipItem.index];
           var tooltipData = allData[tooltipItem.index];

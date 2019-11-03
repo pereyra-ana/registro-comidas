@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Registry } from 'src/app/model/registry';
 import { RegistryDay } from 'src/app/model/registry-day';
 import { RegistryService } from 'src/app/services/registry/registry.service';
+import { RegistryFormComponent } from '../registry-form/registry-form.component';
 
 @Component({
   templateUrl: './registry-list.component.html',
@@ -29,17 +31,34 @@ export class RegistryListComponent implements OnInit {
     let year = d.substring(6);
 
     let date = new Date(month + "/" + day + "/" + year);
-    console.log(date.getDay() + " - " + this.weekday[date.getDay() - 1])
     return date.getDay() != 0 ? this.weekday[date.getDay() - 1] : this.weekday[this.weekday.length - 1]
   }
 
+  result: boolean;
+
   constructor(
     private registryService: RegistryService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.getAll();
+  }
+
+  openNewRegistryDialog(): void {
+    const dialogRef = this.dialog.open(RegistryFormComponent, {
+      width: '250px',
+      data: { result : this.result }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log("result: ");
+      console.log(result)
+      // if (result == true)
+        this.getAll();
+    });
   }
 
   dateAlreadyInResult(result: RegistryDay[], d: string) {
@@ -71,7 +90,7 @@ export class RegistryListComponent implements OnInit {
         result[index].registries.push(r)
       }
 
-      console.log(result);
+      // console.log(result);
     })
     return result.sort((a, b) => new Date(a.datetime) > new Date(b.datetime) ? 1 : -1);
   }
@@ -89,6 +108,20 @@ export class RegistryListComponent implements OnInit {
 
   search(): void {
     this.getAll();
+  }
+
+  updateRegistry(registry: Registry): void {
+    this.registryService.updateRegistry(registry).subscribe(data => {
+      console.log(data);
+      this.getAll();
+    })
+  }
+
+  deleteRegistry(registry: Registry): void {
+    this.registryService.deleteRegistry(registry).subscribe(data => {
+      console.log(data);
+      this.getAll();
+    })
   }
 
 }
