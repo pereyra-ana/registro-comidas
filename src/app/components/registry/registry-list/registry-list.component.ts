@@ -5,6 +5,7 @@ import { Registry } from 'src/app/model/registry';
 import { RegistryDay } from 'src/app/model/registry-day';
 import { RegistryService } from 'src/app/services/registry/registry.service';
 import { RegistryFormComponent } from '../registry-form/registry-form.component';
+import { DialogConfirmComponent } from '../../dialog-confirm/dialog-confirm.component';
 
 @Component({
   templateUrl: './registry-list.component.html',
@@ -14,7 +15,6 @@ import { RegistryFormComponent } from '../registry-form/registry-form.component'
 
 export class RegistryListComponent implements OnInit {
   displayedColumns: string[] = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'];
-  // dataSource: RegistryDay = {};
   dataSource: RegistryDay[] = [];
   totalRegistries: number = 0;
 
@@ -46,17 +46,14 @@ export class RegistryListComponent implements OnInit {
     this.getAll();
   }
 
-  openNewRegistryDialog(): void {
+  openNewRegistryDialog(registry: Registry, oneRegistry: boolean): void {
     const dialogRef = this.dialog.open(RegistryFormComponent, {
       width: '250px',
-      data: { result : this.result }
+      data: { result : this.result, registry: registry, oneRegistry: oneRegistry }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log("result: ");
-      console.log(result)
-      // if (result == true)
+      if (result == true)
         this.getAll();
     });
   }
@@ -90,9 +87,18 @@ export class RegistryListComponent implements OnInit {
         result[index].registries.push(r)
       }
 
-      // console.log(result);
     })
-    return result.sort((a, b) => new Date(a.datetime) > new Date(b.datetime) ? 1 : -1);
+    return result.sort((a, b) => { 
+      let aauxD = a.datetime.substring(0,2);
+      let aauxM = a.datetime.substring(3,5);
+      let aauxY = a.datetime.substring(6);
+
+      let bauxD = b.datetime.substring(0,2);
+      let bauxM = b.datetime.substring(3,5);
+      let bauxY = b.datetime.substring(6);
+
+      return new Date(`${aauxM}/${aauxD}/${aauxY}`) > new Date(`${bauxM}/${bauxD}/${bauxY}`) ? -1 : 1 
+    });
   }
 
   startDateFilter = (date: Date) => date <= this.endDate;
@@ -100,7 +106,6 @@ export class RegistryListComponent implements OnInit {
 
   getAll(): void {
     this.registryService.getAll(this.startDate, this.endDate).subscribe(resp => {
-      // console.log(resp);
       this.dataSource = this.groupByDay(resp);
       this.totalRegistries = resp.length;
     });
@@ -112,16 +117,28 @@ export class RegistryListComponent implements OnInit {
 
   updateRegistry(registry: Registry): void {
     this.registryService.updateRegistry(registry).subscribe(data => {
-      console.log(data);
       this.getAll();
     })
   }
 
   deleteRegistry(registry: Registry): void {
     this.registryService.deleteRegistry(registry).subscribe(data => {
-      console.log(data);
       this.getAll();
     })
+  }
+
+  confirm: boolean;
+
+  openConfirmDeleteDialog(registry: Registry): void {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '250px',
+      data: { confirm : this.confirm }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true)
+        this.deleteRegistry(registry);
+    });
   }
 
 }

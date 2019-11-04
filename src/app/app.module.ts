@@ -14,12 +14,12 @@ import { AppComponent } from './app.component';
 import { ChartBarComponent } from './components/chart/chart-bar/chart-bar.component';
 import { ChartPieComponent } from './components/chart/chart-pie/chart-pie.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RegistryFormComponent } from './components/registry/registry-form/registry-form.component';
 import { RegistryListComponent } from './components/registry/registry-list/registry-list.component';
-import { RegistryNewComponent } from './components/registry/registry-new/registry-new.component';
 import { ResponseHttpInterceptor } from './interceptors/http/response-http.interceptor';
 import { LoaderInterceptor } from './interceptors/loader/loader.interceptor';
 import { LoaderService } from './services/loader/loader.service';
@@ -29,13 +29,13 @@ import { LoaderService } from './services/loader/loader.service';
     AppComponent,
     MenuComponent,
     RegistryListComponent,
-    RegistryNewComponent,
     MainContentComponent,
     ChartComponent,
     ChartPieComponent,
     ChartBarComponent,
     LoaderComponent,
     RegistryFormComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +73,9 @@ import { LoaderService } from './services/loader/loader.service';
     LoaderService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [RegistryFormComponent],
+  entryComponents: [
+    RegistryFormComponent,
+    DialogConfirmComponent
+  ],
 })
 export class AppModule { }

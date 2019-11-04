@@ -22,8 +22,8 @@
         </button>
     </div>
 
-    <button class="round-floating-button1" mat-fab color="primary" (click)="openNewRegistryDialog()"> + </button>
-    <button class="round-floating-button2" mat-fab color="primary" routerLink="/registry/new"> {{'{ }'}} </button>
+    <button class="round-floating-button1" mat-fab color="primary" (click)="openNewRegistryDialog(null, true)"> + </button>
+    <button class="round-floating-button2" mat-fab color="primary" (click)="openNewRegistryDialog(null, false)"> {{'{ }'}} </button>
 
     <div *ngIf="totalRegistries == 0">No hay registros para mostrar</div>
     <div *ngIf="totalRegistries > 0">
@@ -50,13 +50,13 @@
                                     local_hospital</mat-icon>
                                 <mat-icon mat-list-icon style="color: lightseagreen"
                                     *ngIf="c.tipo.toLowerCase() == 'misceláneo'">eco</mat-icon>
-                                <h4 mat-line>{{c.datetime | date : 'hh:mm a'}} - {{c.tipo}}</h4>
+                                <h4 mat-line>{{c.datetime | date : 'hh:mm a'}} {{c.tipoEvento}}</h4>
                                 <p mat-line> {{c.valor}}
                                     {{c.cantidad ? c.cantidad : (c.intensidad ? c.intensidad : '')}} </p>
 
-                                <div>
-                                    <mat-icon (click)="updateRegistry(c)" mat-list-icon>edit</mat-icon>
-                                    <mat-icon (click)="deleteRegistry(c)" mat-list-icon>delete</mat-icon>
+                                <div style="display: inline-block;">
+                                    <mat-icon flex (click)="openNewRegistryDialog(c, true)" mat-list-icon>edit</mat-icon>
+                                    <mat-icon flex (click)="openConfirmDeleteDialog(c)" mat-list-icon>delete</mat-icon>
                                 </div>
 
                             </mat-list-item>

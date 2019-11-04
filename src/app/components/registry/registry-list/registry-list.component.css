@@ -29,8 +29,8 @@ mat-grid-tile {
 
 .round-floating-button2 {
     top: auto !important;
-    right: 100px !important;
-    bottom: 25px !important;
+    right: 25px !important;
+    bottom: 100px !important;
     left: auto !important;
     position: fixed !important;
     z-index: 100000;

@@ -1,60 +1,94 @@
-<h1 mat-dialog-title>Nuevo Registro</h1>
-<div mat-dialog-content>
-    <div class="example-container">
-        <mat-form-field>
-            <mat-select placeholder="Tipo de evento" [(ngModel)]="tipoEvento">
-                <mat-option *ngFor="let e of tiposDeEvento" value="{{e}}">{{e}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+<div *ngIf="oneRegistry == true">
+    <h1 mat-dialog-title>Nuevo Registro</h1>
+    <div mat-dialog-content>
+        <div class="example-container">
+            <mat-form-field>
+                <mat-select placeholder="Tipo de evento" [(ngModel)]="tipoEvento">
+                    <mat-option *ngFor="let e of tiposDeEvento" value="{{e}}">{{e}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-        <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Fecha" [(ngModel)]="fecha">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <div *ngIf="tipoEvento != null && tipoEvento != 'Síntoma' && tipoEvento != 'Actividad Física'">
-            <div *ngIf="tipoEvento != null && tipoEvento != 'Bebida'">
-                Platos
-                <button mat-icon-button aria-label="Nuevo Plato" (click)="addNewPlato()">
-                    <mat-icon>add</mat-icon>
-                </button>
-                <div *ngFor="let b of platosList; let i = index; trackBy:trackByFn">
-                    <mat-form-field style="display: inline-block;">
-                        <input matInput placeholder="Nuevo Plato" [(ngModel)]=platosList[i]>
-                    </mat-form-field>
-                    <button style="display: inline-block;" mat-icon-button aria-label="Borrar" (click)="removePlato(i)">
-                        <mat-icon>remove</mat-icon>
-                    </button>
-                </div>
-            </div>
+            <mat-form-field style="width: 180px;">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha" [(ngModel)]="fecha">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
 
             <div>
-                Bebidas
-                <button mat-icon-button aria-label="Nueva Bebida" (click)="addNewBebida()">
-                    <mat-icon>add</mat-icon>
-                </button>
-                <div *ngFor="let b of bebidasList; let j = index; trackBy:trackByFn">
-                    <mat-form-field>
-                        <input matInput placeholder="Nueva Bebida" [(ngModel)]=bebidasList[j]>
-                    </mat-form-field>
-                    <button mat-icon-button aria-label="Borrar" (click)="removeBebida(j)">
-                        <mat-icon>remove</mat-icon>
+                <mat-form-field style="display: inline-block; width: 85px; margin-right: 10px;">
+                    <input type="number" matInput placeholder="Hora" [(ngModel)]=horaRegistro>
+                </mat-form-field>
+                <mat-form-field style="display: inline-block; width: 85px;">
+                    <input type="number" matInput placeholder="Minutos" [(ngModel)]=minutosRegistro>
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="tipoEvento != null && tipoEvento != 'Síntoma' && tipoEvento != 'Actividad Física'">
+                <div *ngIf="tipoEvento != null && tipoEvento != 'Bebida'">
+                    Platos
+                    <button mat-icon-button aria-label="Nuevo Plato" (click)="addNewPlato()">
+                        <mat-icon>add</mat-icon>
                     </button>
+                    <div *ngFor="let b of platosList; let i = index; trackBy:trackByFn">
+                        <div style="display: flex !important;">
+                            <mat-form-field style="display: inline-block; width: 163px;">
+                                <input matInput placeholder="Nuevo Plato" [(ngModel)]=platosList[i]>
+                            </mat-form-field>
+                            <button style="display: inline-block; width: 20px" mat-icon-button aria-label="Borrar"
+                                (click)="removePlato(i)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    Bebidas
+                    <button mat-icon-button aria-label="Nueva Bebida" (click)="addNewBebida()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <div *ngFor="let b of bebidasList; let j = index; trackBy:trackByFn">
+                        <div style="display: flex !important;">
+                            <mat-form-field style="display: inline-block; width: 163px;">
+                                <input matInput placeholder="Nueva Bebida" [(ngModel)]=bebidasList[j]>
+                            </mat-form-field>
+                            <button style="display: inline-block; width: 20px" mat-icon-button aria-label="Borrar"
+                                (click)="removeBebida(j)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div *ngIf="tipoEvento != null && (tipoEvento == 'Síntoma' || tipoEvento == 'Actividad Física')">
+                <mat-form-field>
+                    <input matInput placeholder="Nuevo dato" [(ngModel)]="notFoodRegistryValue">
+                </mat-form-field>
+            </div>
+
+
         </div>
-
-        <div *ngIf="tipoEvento != null && (tipoEvento == 'Síntoma' || tipoEvento == 'Actividad Física')">
-            <mat-form-field>
-                <input matInput placeholder="Nuevo dato" [(ngModel)]="notFoodRegistryValue">
-            </mat-form-field>
-        </div>
-
-
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button [mat-dialog-close]="true" (click)="submit()"
+            cdkFocusInitial>{{data.registry == null ? 'Crear' : 'Modificar'}}</button>
     </div>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="data.result" (click)="assemblyRegistrosAndCreate()" cdkFocusInitial>Crear</button>
+
+<div *ngIf="oneRegistry == false">
+    <h1 mat-dialog-title>Carga Masiva de Registros</h1>
+    <div mat-dialog-content>
+        <div class="example-container">
+            <mat-form-field>
+                <textarea matInput placeholder="Ingrese JSON de entrada" [(ngModel)]="registriesJson"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button [mat-dialog-close]="true" (click)="submitJson()" [disabled]="!isJsonValid(registriesJson)"
+            cdkFocusInitial>Cargar</button>
+    </div>
 </div>
