@@ -45,17 +45,20 @@ export class RegistryFormComponent implements OnInit {
       this.registryBackup = JSON.parse(JSON.stringify(this.data.registry));
       this.update = true;
       this.tipoEvento = this.data.registry.tipoEvento;
-      this.fecha = this.data.registry.datetime;
+      this.fecha = new Date(this.data.registry.datetime);
       this.platosList = this.data.registry.tipo == 'comida' ? [this.data.registry.valor] : []
       this.bebidasList = this.data.registry.tipo == 'bebida' ? [this.data.registry.valor] : []
       this.notFoodRegistryValue = this.data.registry.tipo != 'comida' && this.data.registry.tipo != 'bebida' ? this.data.registry.valor : null;
+      this.horaRegistro = new Date(this.data.registry.datetime).getHours().toString();
+      this.minutosRegistro = new Date(this.data.registry.datetime).getMinutes().toString();
+    }
+    else {
+      this.fecha = new Date();
+      this.horaRegistro = new Date().getHours().toString();
+      this.minutosRegistro = new Date().getMinutes().toString();
     }
 
     this.oneRegistry = this.data.oneRegistry;
-
-    this.fecha = new Date();
-    this.horaRegistro = new Date().getHours().toString();
-    this.minutosRegistro = new Date().getMinutes().toString();
   }
 
   onNoClick(): void {
@@ -129,6 +132,11 @@ export class RegistryFormComponent implements OnInit {
     if (this.update == true) {
       this.registroService.deleteRegistry(this.registryBackup).subscribe(data => {
         console.log(data);
+      }, error => {
+        this.snackBar.open('Error realizando acción', 'Cerrar', {
+          duration: 2000,
+        });
+        return;
       })
     }
     this.registroService.createRegistry(this.registros).subscribe(resp => {
@@ -141,6 +149,11 @@ export class RegistryFormComponent implements OnInit {
         this.snackBar.open('Registro actualizado con éxito', 'Cerrar', {
           duration: 2000,
         });
+    }, error => {
+      this.snackBar.open('Error realizando acción', 'Cerrar', {
+        duration: 2000,
+      });
+      return;
     });
 
   }
@@ -159,6 +172,11 @@ export class RegistryFormComponent implements OnInit {
       this.snackBar.open('Registros cargados con éxito', 'Cerrar', {
         duration: 2000,
       });
+    }, error => {
+      this.snackBar.open('Error realizando acción', 'Cerrar', {
+        duration: 2000,
+      });
+      return;
     });
   }
 

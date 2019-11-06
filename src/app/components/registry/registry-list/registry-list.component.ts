@@ -20,6 +20,7 @@ export class RegistryListComponent implements OnInit {
 
   startDate: Date = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
   endDate: Date = new Date();
+  valor: string;
 
   weekday = [
     "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"
@@ -49,7 +50,7 @@ export class RegistryListComponent implements OnInit {
   openNewRegistryDialog(registry: Registry, oneRegistry: boolean): void {
     const dialogRef = this.dialog.open(RegistryFormComponent, {
       width: '250px',
-      data: { result : this.result, registry: registry, oneRegistry: oneRegistry }
+      data: { result: this.result, registry: registry, oneRegistry: oneRegistry }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -88,24 +89,37 @@ export class RegistryListComponent implements OnInit {
       }
 
     })
-    return result.sort((a, b) => { 
-      let aauxD = a.datetime.substring(0,2);
-      let aauxM = a.datetime.substring(3,5);
+    return result.sort((a, b) => {
+      let aauxD = a.datetime.substring(0, 2);
+      let aauxM = a.datetime.substring(3, 5);
       let aauxY = a.datetime.substring(6);
 
-      let bauxD = b.datetime.substring(0,2);
-      let bauxM = b.datetime.substring(3,5);
+      let bauxD = b.datetime.substring(0, 2);
+      let bauxM = b.datetime.substring(3, 5);
       let bauxY = b.datetime.substring(6);
 
-      return new Date(`${aauxM}/${aauxD}/${aauxY}`) > new Date(`${bauxM}/${bauxD}/${bauxY}`) ? -1 : 1 
+      return new Date(`${aauxM}/${aauxD}/${aauxY}`) > new Date(`${bauxM}/${bauxD}/${bauxY}`) ? -1 : 1
     });
   }
 
-  startDateFilter = (date: Date) => date <= this.endDate;
-  endDateFilter = (date: Date) => date >= this.startDate;
+  startDateFilter(): any {
+    if (this.endDate){
+      return (date: Date) => date <= this.endDate;
+    } else {
+      return (date: Date) => date <= new Date();
+    }
+  };
+
+  endDateFilter(): any {
+    if (this.startDate){
+      return (date: Date) => date >= this.startDate;
+    } else {
+      return (date: Date) => date >= new Date("01/01/2000");
+    }
+  }
 
   getAll(): void {
-    this.registryService.getAll(this.startDate, this.endDate).subscribe(resp => {
+    this.registryService.getAll(this.startDate, this.endDate, this.valor).subscribe(resp => {
       this.dataSource = this.groupByDay(resp);
       this.totalRegistries = resp.length;
     });
@@ -132,7 +146,7 @@ export class RegistryListComponent implements OnInit {
   openConfirmDeleteDialog(registry: Registry): void {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       width: '250px',
-      data: { confirm : this.confirm }
+      data: { confirm: this.confirm }
     });
 
     dialogRef.afterClosed().subscribe(result => {
