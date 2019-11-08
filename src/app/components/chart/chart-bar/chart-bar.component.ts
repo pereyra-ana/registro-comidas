@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Label, Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-chart-bar',
@@ -45,43 +45,43 @@ export class ChartBarComponent implements OnInit {
         anchor: 'end',
         align: 'end',
       }
+    },
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          debugger;
+          let data1 = data.datasets[0].data[tooltipItem.index];
+          let data2 = data.datasets[1].data[tooltipItem.index];
+          let sumData = +data1 + +data2;
+
+          let allData = data.datasets[tooltipItem.datasetIndex].data;
+          var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label
+          var tooltipData = allData[tooltipItem.index];
+          var p = +tooltipData * 100 / sumData;
+
+          return tooltipLabel + ": " + p.toString().substring(0, 5) + "%";
+        }
+      }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   // public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [], label: '' },
+    { data: [], label: '' }
   ];
+
+  public barChartColors: Color[] = [
+    { backgroundColor: '#89E1CD' },
+    { backgroundColor: '#E18990' },
+  ]
 
   constructor() { }
 
   ngOnInit() {
   }
-
-  // events
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    // console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    // console.log(event, active);
-  }
-
-  // public randomize(): void {
-  //   // Only Change 3 values
-  //   const data = [
-  //     Math.round(Math.random() * 100),
-  //     59,
-  //     80,
-  //     (Math.random() * 100),
-  //     56,
-  //     (Math.random() * 100),
-  //     40];
-  //   this.barChartData[0].data = data;
-  // }
 
 }

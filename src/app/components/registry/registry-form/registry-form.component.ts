@@ -45,9 +45,9 @@ export class RegistryFormComponent implements OnInit {
       this.registryBackup = JSON.parse(JSON.stringify(this.data.registry));
       this.update = true;
       this.tipoEvento = this.data.registry.tipoEvento;
+      this.platosList = this.data.registry.tipo == 'comida' ? this.data.registry.cantidad > 1 ? [[this.data.registry.valor, this.data.registry.cantidad].join("|")] : [this.data.registry.valor] : []
       this.fecha = new Date(this.data.registry.datetime);
-      this.platosList = this.data.registry.tipo == 'comida' ? [this.data.registry.valor] : []
-      this.bebidasList = this.data.registry.tipo == 'bebida' ? [this.data.registry.valor] : []
+      this.bebidasList = this.data.registry.tipo == 'bebida' ? this.data.registry.cantidad > 1 ? [[this.data.registry.valor, this.data.registry.cantidad].join("|")] : [this.data.registry.valor] : []
       this.notFoodRegistryValue = this.data.registry.tipo != 'comida' && this.data.registry.tipo != 'bebida' ? this.data.registry.valor : null;
       this.horaRegistro = new Date(this.data.registry.datetime).getHours().toString();
       this.minutosRegistro = new Date(this.data.registry.datetime).getMinutes().toString();
@@ -90,7 +90,7 @@ export class RegistryFormComponent implements OnInit {
       this.platosList.filter(rp => rp != null && rp != '').forEach(p => {
         let r = new Registry();
         r.tipo = 'comida';
-        
+
         this.fecha.setHours(+this.horaRegistro);
         this.fecha.setMinutes(+this.minutosRegistro);
         r.datetime = this.fecha;
