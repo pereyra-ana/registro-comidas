@@ -16,7 +16,7 @@ export interface DialogData {
 })
 export class RegistryFormComponent implements OnInit {
 
-  tiposDeEvento: string[] = ['Bebida', 'Desayuno', 'Almuerzo', 'Cena', 'Colación', 'Síntoma', 'Actividad Física'];
+  tiposDeEvento: string[] = ['Bebida', 'Desayuno', 'Almuerzo', 'Cena', 'Colación', 'Síntoma', 'Actividad Física', 'Medicación', 'Misceláneo'];
 
   platosList: string[] = [];
   bebidasList: string[] = [];
@@ -86,7 +86,7 @@ export class RegistryFormComponent implements OnInit {
   assemblyRegistrosAndSubmit(): void {
     this.data.result = true;
 
-    if (this.tipoEvento != 'Síntoma' && this.tipoEvento != 'Actividad Física') {
+    if (this.tipoEvento != 'Síntoma' && this.tipoEvento != 'Actividad Física' && this.tipoEvento != 'Medicación' && this.tipoEvento != 'Misceláneo'){
       this.platosList.filter(rp => rp != null && rp != '').forEach(p => {
         let r = new Registry();
         r.tipo = 'comida';
@@ -123,7 +123,7 @@ export class RegistryFormComponent implements OnInit {
         this.fecha.setMinutes(+this.minutosRegistro);
         r.datetime = this.fecha;
 
-        r.tipo = this.tipoEvento == "Síntoma" ? 'síntoma' : 'misceláneo';
+        r.tipo = this.tipoEvento;
         r.valor = this.notFoodRegistryValue;
         this.registros.push(r);
       }

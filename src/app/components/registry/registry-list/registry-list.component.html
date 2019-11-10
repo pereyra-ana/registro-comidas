@@ -71,6 +71,12 @@
                                 <mat-icon mat-list-icon style=" color:red"
                                     *ngIf="c.tipoEvento && c.tipoEvento.toLowerCase() == 'síntoma'">
                                     local_hospital</mat-icon>
+                                <mat-icon mat-list-icon style="color: rgb(253, 164, 111)"
+                                    *ngIf="c.tipoEvento && c.tipoEvento.toLowerCase() == 'medicación'">build
+                                </mat-icon>
+                                <mat-icon mat-list-icon style="color: rgb(201, 117, 250)"
+                                    *ngIf="c.tipoEvento && c.tipoEvento.toLowerCase() == 'misceláneo'">event
+                                </mat-icon>
 
                                 <mat-icon mat-list-icon style="color: darkgray"
                                     *ngIf="c.tipo.toLowerCase() == 'comida'">restaurant_menu
@@ -82,7 +88,14 @@
                                     *ngIf="!c.tipoEvento && c.tipo.toLowerCase() == 'síntoma'">
                                     local_hospital</mat-icon>
                                 <mat-icon mat-list-icon style="color: cornflowerblue"
-                                    *ngIf="!c.tipoEvento && c.tipo.toLowerCase() == 'misceláneo'">sports</mat-icon>
+                                    *ngIf="!c.tipoEvento && c.tipo.toLowerCase() == 'actividad física'">sports
+                                </mat-icon>
+                                <mat-icon mat-list-icon style="color: rgb(241, 172, 68)"
+                                    *ngIf="!c.tipoEvento && c.tipo.toLowerCase() == 'medicación'">build
+                                </mat-icon>
+                                <mat-icon mat-list-icon style="color: rgb(201, 117, 250)"
+                                    *ngIf="!c.tipoEvento && c.tipo.toLowerCase() == 'misceláneo'">event
+                                </mat-icon>
 
                                 <h4 mat-line>{{c.datetime | date : 'hh:mm a'}} {{c.tipoEvento}}</h4>
                                 <p mat-line> {{c.valor}}
