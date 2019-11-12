@@ -23,7 +23,7 @@
                 </mat-form-field>
             </div>
 
-            <div *ngIf="tipoEvento != null && tipoEvento != 'Síntoma' && tipoEvento != 'Actividad Física' && tipoEvento != 'Medicación'">
+            <div *ngIf="tipoEvento != null && tipoEvento != 'Síntoma' && tipoEvento != 'Actividad Física' && tipoEvento != 'Medicación' && tipoEvento != 'Misceláneo'">
                 <div *ngIf="tipoEvento != null && tipoEvento != 'Bebida'">
                     Platos
                     <button mat-icon-button aria-label="Nuevo Plato" (click)="addNewPlato()">
