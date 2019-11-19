@@ -6,3 +6,8 @@
 mat-list mat-list-item [mat-line] {
     white-space: normal !important;
 }
+
+mat-list-item{
+    height: auto !important;
+    margin-bottom: 10px;
+} 

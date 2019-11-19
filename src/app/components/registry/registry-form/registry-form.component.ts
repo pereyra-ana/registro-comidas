@@ -96,7 +96,7 @@ export class RegistryFormComponent implements OnInit {
         r.datetime = this.fecha;
 
         r.tipoEvento = this.tipoEvento;
-        r.valor = p.split("|")[0];
+        r.valor = p.split("|")[0].trim();
         r.cantidad = p.split("|")[1] ? +p.split("|")[1] : 1
         this.registros.push(r)
       });
@@ -110,7 +110,7 @@ export class RegistryFormComponent implements OnInit {
         r.datetime = this.fecha;
 
         r.tipoEvento = this.tipoEvento;
-        r.valor = b.split("|")[0];
+        r.valor = b.split("|")[0].trim();
         r.cantidad = b.split("|")[1] ? +b.split("|")[1] : 1
         this.registros.push(r)
       });
@@ -124,7 +124,7 @@ export class RegistryFormComponent implements OnInit {
         r.datetime = this.fecha;
 
         r.tipo = this.tipoEvento;
-        r.valor = this.notFoodRegistryValue;
+        r.valor = this.notFoodRegistryValue.trim();
         this.registros.push(r);
       }
     }
