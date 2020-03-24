@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Label, Color } from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-chart-bar',
@@ -34,12 +34,29 @@ export class ChartBarComponent implements OnInit {
   @Input()
   set chartName(chartName: string) {
     // this.pieChartOptions.legend.display = this.getDisplayLabels(chartName);
+    if (chartName === 'sintomas') {
+      this.barChartData = [
+        // { backgroundColor: '#89E1CD' },
+        { backgroundColor: '#E18990' },
+      ]
+    } else if (chartName === 'actividadFisica') {
+      this.barChartData = [
+        { backgroundColor: '#89E1CD' },
+        // { backgroundColor: '#E18990' },
+      ]
+    }
   }
 
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: {
+      xAxes: [{}], yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -49,17 +66,21 @@ export class ChartBarComponent implements OnInit {
     tooltips: {
       callbacks: {
         label: function (tooltipItem, data) {
-          debugger;
-          let data1 = data.datasets[0].data[tooltipItem.index];
-          let data2 = data.datasets[1].data[tooltipItem.index];
-          let sumData = +data1 + +data2;
+          if (this.chartName === 'permitidosVsNo') {
+            let data1 = data.datasets[0].data[tooltipItem.index];
+            let data2 = data.datasets[1].data[tooltipItem.index];
+            let sumData = +data1 + +data2;
 
+            let allData = data.datasets[tooltipItem.datasetIndex].data;
+            var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label
+            var tooltipData = allData[tooltipItem.index];
+            var p = +tooltipData * 100 / sumData;
+
+            return tooltipLabel + ": " + p.toString().substring(0, 5) + "%";
+          }
           let allData = data.datasets[tooltipItem.datasetIndex].data;
-          var tooltipLabel = data.datasets[tooltipItem.datasetIndex].label
           var tooltipData = allData[tooltipItem.index];
-          var p = +tooltipData * 100 / sumData;
-
-          return tooltipLabel + ": " + p.toString().substring(0, 5) + "%";
+          return tooltipData.toString();
         }
       }
     }

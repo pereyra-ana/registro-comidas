@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faAppleAlt, faBan, faBreadSlice, faCarrot, faCheese, faCoffee, faDrumstickBite, faEgg, faGlassMartiniAlt, faIceCream } from '@fortawesome/free-solid-svg-icons';
+import { faAppleAlt, faBan, faBreadSlice, faCarrot, faCheese, faCoffee, faDrumstickBite, faEgg, faFireAlt, faGlassMartiniAlt, faIceCream } from '@fortawesome/free-solid-svg-icons';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -141,5 +141,6 @@ export class ChartPieComponent implements OnInit {
   faDrink = faGlassMartiniAlt;
   faCheese = faCheese;
   faBan = faBan;
+  faFire = faFireAlt;
 
 }

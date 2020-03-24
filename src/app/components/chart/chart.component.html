@@ -40,6 +40,18 @@
             [amounts]="amountsPermitidosVsNo"
             [chartName]="'permitidosVsNo'"></app-chart-bar>
         </mat-tab>
+        <mat-tab label="Síntomas">
+            <app-chart-bar class="tab-content" 
+            [labels]="labelsSintomas" 
+            [amounts]="amountsSintomas"
+            [chartName]="'sintomas'"></app-chart-bar>
+        </mat-tab>
+        <mat-tab label="Actividad Física">
+            <app-chart-bar class="tab-content" 
+            [labels]="labelsActividadFisica" 
+            [amounts]="amountsActividadFisica"
+            [chartName]="'actividadFisica'"></app-chart-bar>
+        </mat-tab>
     </mat-tab-group>
 
 </mat-card>

@@ -46,6 +46,9 @@
                 <mat-icon mat-list-icon style="color: red" *ngIf="e.key == 'OTROS'">
                     <fa-icon [icon]="faBan"></fa-icon>
                 </mat-icon>
+                <mat-icon mat-list-icon style="color: brown" *ngIf="e.key == 'SALSAS'">
+                    <fa-icon [icon]="faFire"></fa-icon>
+                </mat-icon>
 
                 <h4 mat-line>{{e.key}}</h4>
                 <p mat-line *ngFor="let v of e.value">

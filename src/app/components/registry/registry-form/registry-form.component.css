@@ -1,3 +1,11 @@
 textarea {
     height: 200px !important
 }
+
+::ng-deep .snackbar-success {
+    background: lightseagreen;
+}
+
+::ng-deep .snackbar-error {
+    background:lightcoral;
+}

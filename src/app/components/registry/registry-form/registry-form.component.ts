@@ -143,14 +143,17 @@ export class RegistryFormComponent implements OnInit {
       console.log(resp);
       if (this.update == false)
         this.snackBar.open('Registro cargado con éxito', 'Cerrar', {
+          panelClass: ['snackbar-success'],
           duration: 2000,
         });
       else
         this.snackBar.open('Registro actualizado con éxito', 'Cerrar', {
+          panelClass: ['snackbar-success'],
           duration: 2000,
         });
     }, error => {
       this.snackBar.open('Error realizando acción', 'Cerrar', {
+        panelClass: ['snackbar-error'],
         duration: 2000,
       });
       return;
