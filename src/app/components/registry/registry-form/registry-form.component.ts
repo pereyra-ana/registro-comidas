@@ -16,7 +16,7 @@ export interface DialogData {
 })
 export class RegistryFormComponent implements OnInit {
 
-  tiposDeEvento: string[] = ['Bebida', 'Desayuno', 'Almuerzo', 'Cena', 'Colación', 'Síntoma', 'Actividad Física', 'Medicación', 'Misceláneo'];
+  tiposDeEvento: string[] = ['Bebida', 'Desayuno', 'Almuerzo', 'Cena', 'Colación', 'Síntoma', 'Actividad Física', 'Medicación', 'Misceláneo', 'Peso'];
 
   platosList: string[] = [];
   bebidasList: string[] = [];
@@ -86,7 +86,7 @@ export class RegistryFormComponent implements OnInit {
   assemblyRegistrosAndSubmit(): void {
     this.data.result = true;
 
-    if (this.tipoEvento != 'Síntoma' && this.tipoEvento != 'Actividad Física' && this.tipoEvento != 'Medicación' && this.tipoEvento != 'Misceláneo'){
+    if (this.isEventoComida(this.tipoEvento)) {
       this.platosList.filter(rp => rp != null && rp != '').forEach(p => {
         let r = new Registry();
         r.tipo = 'comida';
@@ -192,6 +192,16 @@ export class RegistryFormComponent implements OnInit {
         return false;
       }
     } return false;
+  }
+
+  isEventoComida(tipoEvento: string): boolean {
+    if (tipoEvento != null) {
+      return tipoEvento != 'Síntoma' &&
+        tipoEvento != 'Actividad Física' &&
+        tipoEvento != 'Medicación' &&
+        tipoEvento != 'Misceláneo' &&
+        tipoEvento != 'Peso';
+    }
   }
 
 }

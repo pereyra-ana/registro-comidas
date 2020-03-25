@@ -45,6 +45,9 @@ export class ChartComponent implements OnInit {
   labelsActividadFisica: Label[];
   amountsActividadFisica: ChartDataSets[];
 
+  labelsPeso: Label[];
+  amountsPeso: ChartDataSets[];
+
   getDataForCharts(): void {
     // datos para alimentos vs total
     this.chartsService.getDataForChart(this.startDate, this.endDate, 'alimentosVsTotal').subscribe(data => {
@@ -64,23 +67,30 @@ export class ChartComponent implements OnInit {
 
     // datos para permitidos vs no permitidos
     this.chartsService.getDataForChart(null, null, 'permitidosVsNo').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.labelsPermitidosVsNo = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
       this.amountsPermitidosVsNo = data.amounts;
     })
 
     // datos para permitidos vs no permitidos
     this.chartsService.getDataForChart(null, null, 'sintomas').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.labelsSintomas = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
       this.amountsSintomas = data.amounts;
     })
 
     // datos para permitidos vs no permitidos
     this.chartsService.getDataForChart(null, null, 'actividadFisica').subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.labelsActividadFisica = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
       this.amountsActividadFisica = data.amounts;
+    })
+
+    // datos para permitidos vs no permitidos
+    this.chartsService.getDataForChart(null, null, 'peso').subscribe(data => {
+      // console.log(data);
+      this.labelsPeso = data.labels; // estas labels deberian venir con las listas de alimentos dentro de cada tipo
+      this.amountsPeso = data.amounts;
     })
   }
 }

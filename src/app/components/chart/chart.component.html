@@ -52,6 +52,12 @@
             [amounts]="amountsActividadFisica"
             [chartName]="'actividadFisica'"></app-chart-bar>
         </mat-tab>
+        <mat-tab label="Peso">
+            <app-chart-line class="tab-content"
+            [labels]="labelsPeso" 
+            [amounts]="amountsPeso"
+            [chartName]="'peso'"></app-chart-line>
+        </mat-tab>
     </mat-tab-group>
 
 </mat-card>

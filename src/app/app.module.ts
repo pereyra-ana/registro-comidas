@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChartBarComponent } from './components/chart/chart-bar/chart-bar.component';
+import { LineChartComponent } from './components/chart/chart-line/chart-line.component';
 import { ChartPieComponent } from './components/chart/chart-pie/chart-pie.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
@@ -36,6 +37,7 @@ import { LoaderService } from './services/loader/loader.service';
     LoaderComponent,
     RegistryFormComponent,
     DialogConfirmComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
